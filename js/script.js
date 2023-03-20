@@ -32,20 +32,8 @@ for (let question of questions) {
 
 	choices.forEach((choice) => {
 		choice.addEventListener("click", function (e) {
-			// console.log(e.target.id, e.target.id.includes("cat1")); // string type
-
 			const categories = e.target.parentElement.parentElement.classList[1].split("-");
-			// console.log(categories);
-			// console.log(values[categories[0]]);
 			values[categories[0]][categories[1]] = Number(e.target.value);
-			// console.log(values[categories[0]][categories[1]]);
-			// if (categories.includes("c1")) {
-			// 	values.social += Number(e.target.value);
-			// } else if (categories.includes("c2")) {
-			// 	values.solution += Number(e.target.value);
-			// } else if (categories.includes("c3")) {
-			// 	values.market += Number(e.target.value);
-			// }
 
 			if (e.target.name === "cat5-q8") {
 				document.querySelector(".submit.disabled").classList.toggle("disabled");
@@ -54,14 +42,10 @@ for (let question of questions) {
 			const nextQuestion = question.nextElementSibling;
 
 			if (nextQuestion) {
-				// nextQuestion.scrollIntoView({ behavior: "smooth", block: "end" });
-				// nextQuestion.focus();
 				nextQuestion.classList.remove("d-none");
 			}
 
 			if (nextQuestion === null) {
-				// console.log(question.parentElement.parentElement.nextElementSibling.classList);
-
 				const nextSection = question.parentElement.parentElement.nextElementSibling;
 
 				if (nextSection !== null) {
@@ -79,6 +63,72 @@ for (let question of questions) {
 		});
 	});
 }
+let radarChartOptions = {
+	series: [
+		{
+			name: "Score",
+			data: [],
+		},
+	],
+	chart: {
+		// height: 350,
+		type: "radar",
+	},
+	// title: {
+	// 	text: "Social Finance Survey",
+	// },
+	// fill: {
+	// 	opacity: 1,
+	// },
+	yaxis: { show: false, min: 0, max: 40 },
+	toolbar: { show: false },
+	xaxis: {
+		categories: [
+			"The Social Problem",
+			"The Solution & Impact",
+			"Market & Distribution",
+			"Growth & Scaling",
+			"Financing & Forecasts",
+		],
+	},
+};
+
+const barChartOptions = {
+	series: [
+		{
+			name: "Score",
+			data: [],
+		},
+	],
+	chart: {
+		type: "bar",
+		// height: 350,
+	},
+	plotOptions: {
+		bar: {
+			borderRadius: 4,
+			horizontal: true,
+		},
+	},
+	dataLabels: {
+		enabled: false,
+	},
+	toolbar: { show: false },
+	xaxis: {
+		categories: [
+			"The Social Problem",
+			"The Solution & Impact",
+			"Market & Distribution",
+			"Growth & Scaling",
+			"Financing & Forecasts",
+		],
+	},
+};
+
+const barChart = new ApexCharts(document.getElementById("bar"), barChartOptions);
+barChart.render();
+const radarChart = new ApexCharts(document.getElementById("radar"), radarChartOptions);
+radarChart.render();
 
 document.getElementById("submit").addEventListener("click", (e) => {
 	for (let prop in values) {
@@ -88,7 +138,6 @@ document.getElementById("submit").addEventListener("click", (e) => {
 			resultArray.push(sum);
 		}
 	}
-	// console.log(result);
 
 	e.target.classList.add("d-none");
 	document.querySelector(".accordion").classList.add("d-none");
@@ -108,278 +157,120 @@ document.getElementById("submit").addEventListener("click", (e) => {
 	// console.log(ctx.parentElement, ctx);
 
 	Chart.defaults.color = "white";
+	radarChartOptions.series[0].data = resultArray;
+	barChartOptions.series[0].data = resultArray;
 
-	new Chart(ctx, {
-		type: "bar",
-		data: {
-			labels: [
-				"The Social Problem",
-				"The Solution & Impact",
-				"Market & Distribution",
-				"Growth & Scaling",
-				"Financing & Forecasts",
-			],
-			datasets: [
-				{
-					label: "Score",
-					data: resultArray,
-					borderWidth: 1,
-					backgroundColor: "#a2c709",
-					// borderColor: "white",
-				},
-			],
-		},
-		options: {
-			indexAxis: "y",
-			scales: {
-				y: {
-					beginAtZero: true,
-				},
-				x: {
-					max: 40,
-				},
-				// xAxes: [
-				// 	{
-				// 		ticks: {
-				// 			fontColor: "white",
-				// 		},
-				// 		gridLines: {
-				// 			color: "white",
-				// 		},
-				// 	},
-				// ],
-				// yAxes: [
-				// 	{
-				// 		ticks: {
-				// 			fontColor: "white",
-				// 		},
-				// 		gridLines: {
-				// 			color: "white",
-				// 		},
-				// 	},
-				// ],
-			},
-		},
-	});
-	new Chart(barAlt, {
-		type: "bar",
-		data: {
-			labels: [
-				"The Social Problem",
-				"The Solution & Impact",
-				"Market & Distribution",
-				"Growth & Scaling",
-				"Financing & Forecasts",
-			],
-			datasets: [
-				{
-					label: "Score",
-					data: resultArray,
-					borderWidth: 1,
-					backgroundColor: "#a2c709",
-					borderColor: "white",
-				},
-			],
-		},
-		options: {
-			indexAxis: "y",
-			scales: {
-				y: {
-					beginAtZero: true,
-				},
-				x: {
-					max: 40,
-				},
-			},
-		},
-	});
+	// new Chart(ctx, {
+	// 	type: "bar",
+	// 	data: {
+	// 		labels: [
+	// 			"The Social Problem",
+	// 			"The Solution & Impact",
+	// 			"Market & Distribution",
+	// 			"Growth & Scaling",
+	// 			"Financing & Forecasts",
+	// 		],
+	// 		datasets: [
+	// 			{
+	// 				label: "Score",
+	// 				data: resultArray,
+	// 				borderWidth: 1,
+	// 				backgroundColor: "#a2c709",
+	// 				// borderColor: "white",
+	// 			},
+	// 		],
+	// 	},
+	// 	options: {
+	// 		indexAxis: "y",
+	// 		scales: {
+	// 			y: {
+	// 				beginAtZero: true,
+	// 			},
+	// 			x: {
+	// 				max: 40,
+	// 			},
+	// 			// xAxes: [
+	// 			// 	{
+	// 			// 		ticks: {
+	// 			// 			fontColor: "white",
+	// 			// 		},
+	// 			// 		gridLines: {
+	// 			// 			color: "white",
+	// 			// 		},
+	// 			// 	},
+	// 			// ],
+	// 			// yAxes: [
+	// 			// 	{
+	// 			// 		ticks: {
+	// 			// 			fontColor: "white",
+	// 			// 		},
+	// 			// 		gridLines: {
+	// 			// 			color: "white",
+	// 			// 		},
+	// 			// 	},
+	// 			// ],
+	// 		},
+	// 	},
+	// });
+	// new Chart(barAlt, {
+	// 	type: "bar",
+	// 	data: {
+	// 		labels: [
+	// 			"The Social Problem",
+	// 			"The Solution & Impact",
+	// 			"Market & Distribution",
+	// 			"Growth & Scaling",
+	// 			"Financing & Forecasts",
+	// 		],
+	// 		datasets: [
+	// 			{
+	// 				label: "Score",
+	// 				data: resultArray,
+	// 				borderWidth: 1,
+	// 				backgroundColor: "#a2c709",
+	// 				borderColor: "white",
+	// 			},
+	// 		],
+	// 	},
+	// 	options: {
+	// 		indexAxis: "y",
+	// 		scales: {
+	// 			y: {
+	// 				beginAtZero: true,
+	// 			},
+	// 			x: {
+	// 				max: 40,
+	// 			},
+	// 		},
+	// 	},
+	// });
 
 	const polarArea = document.getElementById("polar");
 	const polarAlt = document.getElementById("polarAlt");
 
-	new Chart(polarArea, {
-		type: "polarArea",
-		data: {
-			labels: [
-				"The Social Problem",
-				"The Solution & Impact",
-				"Market & Distribution",
-				"Growth & Scaling",
-				"Financing & Forecasts",
-			],
-			datasets: [
-				{
-					label: "Score",
-					data: resultArray,
-					borderWidth: 1,
-					backgroundColor: "#a2c709",
-					// borderColor: "#a2c709",
-				},
-			],
-		},
-		options: {
-			responsive: true,
-			scales: {
-				r: {
-					pointLabels: {
-						display: true,
-						centerPointLabels: true,
-						font: {
-							size: 18,
-						},
-					},
-					max: 40,
-					grid: {
-						color: "white",
-					},
-				},
-			},
-			plugins: {
-				legend: {
-					// position: "top",
-					display: false,
-				},
-				// title: {
-				// 	display: true,
-				// 	text: "Chart.js Polar Area Chart With Centered Point Labels",
-				// },
-			},
-		},
-	});
-	new Chart(polarAlt, {
-		type: "polarArea",
-		data: {
-			labels: [
-				"The Social Problem",
-				"The Solution & Impact",
-				"Market & Distribution",
-				"Growth & Scaling",
-				"Financing & Forecasts",
-			],
-			datasets: [
-				{
-					label: "Score",
-					data: resultArray,
-					borderWidth: 1,
-					backgroundColor: "#a2c709",
-					borderColor: "#a2c709",
-				},
-			],
-		},
-		options: {
-			responsive: true,
-			scales: {
-				r: {
-					pointLabels: {
-						display: true,
-						centerPointLabels: true,
-						font: {
-							size: 18,
-						},
-					},
-					grid: {
-						color: "white",
-					},
-					max: 40,
-				},
-				// xAxes: [
-				// 	{
-				// 		ticks: {
-				// 			fontColor: "white",
-				// 		},
-				// 	},
-				// ],
-			},
-			plugins: {
-				legend: {
-					// position: "top",
-					display: false,
-				},
-				// title: {
-				// 	display: true,
-				// 	text: "Chart.js Polar Area Chart With Centered Point Labels",
-				// },
-			},
-		},
-	});
 	document.getElementById("download").style.display = "inline-block";
 });
 
 document.getElementById("download").addEventListener("click", function downloadPDF(e) {
 	e.preventDefault();
-	// creating div for downloading pdf
 	const enterBefore = document.querySelector(".accordion");
 	const newDiv = document.createElement("div");
 	newDiv.id = "calPDF";
 	const chartsDiv = document.createElement("div");
 	chartsDiv.classList.add("chartsPdf");
-	// chartsDiv.style.pageBreakBefore = "always";
 	chartsDiv.style.display = "flex";
 	chartsDiv.style.justifyContent = "center";
 	chartsDiv.style.alignItems = "center";
-	// chartsDiv.style.gap = "20px";
-	// chartsDiv.style.position = "relative";
-	// chartsDiv.style.top = "50%";
-	// chartsDiv.style.transform = "translateY(-50%)";
 	enterBefore.prepend(newDiv);
 
-	// const physical = document.querySelector(".physical-wellbeing");
-	// const mental = document.querySelector(".mental-wellbeing");
-	// mental.style.pageBreakAfter = "always";
-	// const professional = document.querySelector(".professional-life");
-	// const social = document.querySelector(".social-life");
-	// social.style.pageBreakAfter = "always";
-	// const wheel = document.querySelector(".wheel-of-wellness");
-	// wheel.style.pageBreakAfter = "always";
-	// const goals = document.querySelector(".goals-section");
-	// goals.style.pageBreakAfter = "always";
-	// const purpose = document.querySelector(".purpose-section");
-	// purpose.style.pageBreakAfter = "always";
-	// const change = document.querySelector(".change-section");
-	// const environment = document.querySelector(".environment-section");
-	// const time = document.querySelector(".time-section");
-	// const stress = document.querySelector(".stress-section");
-	// stress.style.pageBreakAfter = "always";
-	// const last = document.querySelector(".last-section");
-	const polar = document.getElementById("polar");
+	const polar = document.getElementById("radar");
 	const bar = document.getElementById("bar");
-	polar.style.width = "650px";
-	polar.style.height = "690px";
 	polar.style.marginInline = "auto";
-	bar.style.width = "650px";
-	bar.style.height = "690px";
 	bar.style.marginInline = "auto";
 	bar.style.pageBreakAfter = "always";
-	// const container = document.querySelector(".container");
-	// const details = document.createElement("div");
-	// details.innerHTML = `
-	// <div id="download-div">
-	// <h3>
-	//     Wheel of Wellness
-	// </h3>
-	// <p>
-	//     To be truly fulfilled, one needs to lead a balanced life. When life is busy, or all your energy is focused on a special project, you can find yourself off balance, not paying enough attention to important areas of your life. By regularly taking a helicopter view of your life, you can bring things back into balance.
-	// </p>
-	// </div>
-	// `;
+
 	chartsDiv.prepend(polar, bar);
-	newDiv.prepend(
-		// 	physical,
-		// 	mental,
-		// 	professional,
-		// 	social,
-		// 	wheel,
-		// 	details,
-		chartsDiv
-		// container
-		// 	goals,
-		// 	purpose,
-		// 	change,
-		// 	environment,
-		// 	time,
-		// 	stress,
-		// 	last
-	);
+	newDiv.prepend(chartsDiv);
 
 	const element = document.getElementById("calPDF");
 	html2pdf()
@@ -389,15 +280,6 @@ document.getElementById("download").addEventListener("click", function downloadP
 			filename: "Social Finance Q&A.pdf",
 			html2canvas: { scale: 2 },
 			jsPDF: { unit: "in", format: "letter", orientation: "portrait", compressPDF: true, dpi: 300 },
-			// html2canvas: {
-			// 	scale: 1,
-			// },
-			// jsPDF: {
-			// 	orientation: "portrait",
-			// 	unit: "in",
-			// 	format: "letter",
-			// 	compressPDF: true,
-			// },
 		})
 		.save()
 		.then(() => {

@@ -162,7 +162,7 @@ input[type="radio"]:checked + label {
 	width: 100%;
 }
 
-#polar,
+/* #polar,
 #bar {
 	width: 50% !important;
 	height: 50% !important;
@@ -172,6 +172,17 @@ input[type="radio"]:checked + label {
 #barAlt {
 	width: 50% !important;
 	height: 50% !important;
+} */
+
+/* #bar,
+#radar {
+	width: 600px;
+	height: 400px;
+	margin: auto;
+} */
+
+.apexcharts-toolbar {
+	display: none !important;
 }
 
 @media print {
