@@ -177,8 +177,8 @@ let radarAltChartOptions = {
 	],
 	chart: {
 		type: "radar",
-		height: 300,
-		width: 450,
+		height: 250,
+		width: 400,
 	},
 	colors: ["#a2c709"],
 	fill: {
@@ -224,8 +224,8 @@ const barAltChartOptions = {
 	],
 	chart: {
 		type: "bar",
-		height: 200,
-		width: 400,
+		height: 150,
+		width: 350,
 	},
 	plotOptions: {
 		bar: {
@@ -319,41 +319,102 @@ document.getElementById("download").addEventListener("click", function downloadP
 
 	document.getElementById("radarAlt").style.display = "block";
 	document.getElementById("barAlt").style.display = "block";
+	setTimeout(() => {
+		const enterBefore = document.querySelector(".accordion");
+		const newDiv = document.createElement("div");
+		newDiv.id = "calPDF";
+		const chartsDiv = document.createElement("div");
+		chartsDiv.classList.add("chartsPdf");
+		chartsDiv.style.display = "flex";
+		chartsDiv.style.justifyContent = "center";
+		chartsDiv.style.alignItems = "center";
+		chartsDiv.style.width = "100%";
+		chartsDiv.style.maxHeight = "400px";
+		chartsDiv.style.backgroundColor = "#191919cc";
+		enterBefore.prepend(newDiv);
 
-	const enterBefore = document.querySelector(".accordion");
-	const newDiv = document.createElement("div");
-	newDiv.id = "calPDF";
-	const chartsDiv = document.createElement("div");
-	chartsDiv.classList.add("chartsPdf");
-	chartsDiv.style.display = "flex";
-	chartsDiv.style.justifyContent = "center";
-	chartsDiv.style.alignItems = "center";
-	chartsDiv.style.width = "100%";
-	chartsDiv.style.height = "100%";
-	chartsDiv.style.backgroundColor = "#191919cc";
-	enterBefore.prepend(newDiv);
+		const radar = document.getElementById("radarAlt");
+		const bar = document.getElementById("barAlt");
+		radar.style.marginInline = "auto";
+		bar.style.marginInline = "auto";
+		bar.style.pageBreakAfter = "always";
 
-	const radar = document.getElementById("radarAlt");
-	const bar = document.getElementById("barAlt");
-	radar.style.marginInline = "auto";
-	bar.style.marginInline = "auto";
-	bar.style.pageBreakAfter = "always";
+		const header = document.createElement("div");
+		header.innerHTML = `
+    	<div id="header-pdf">
+    		<h3>
+        		INVESTMENT READINESS ROADMAP
+    		</h3>
+    		<p>
+        		Test and improve your capacity to attract and use investment to scale your impact.
+    		</p>
+    	</div>`;
 
-	chartsDiv.prepend(radar, bar);
-	newDiv.prepend(chartsDiv);
+		const details = document.createElement("div");
+		details.innerHTML = `
+    	<div id="details-pdf">
+    		<p>
+        		Welcome to the Investment Readiness Roadmap! It is a systematic toolkit to support impact entrepreneurs on their journeys towards investment readiness and to strengthen their ability to raise capital from investors. The IR Roadmap is introduced in the context of the "B-Briddhi – Scaling Impact Enterprises of Bangladesh" program:
+    		</p>
+    		<p>
+        		It is designed as a practice-driven framework and consists of a series of targeted questions in 5 key categories. These questions will allow you to reflect on where you currently are within your investment readiness journey. Based on your answers, you will see a spiderweb graph highlighting your strengths, gaps and areas for improvement. Don’t assume you’ll need a perfect score in all categories to be able to attract investors. Rather consider it as a continuous opportunity for learning.
+    		</p>
+    	</div>`;
+		details.style.pageBreakAfter = "always";
 
-	const element = document.getElementById("calPDF");
-	html2pdf()
-		.from(element)
-		.set({
-			margin: 0.5,
-			filename: "Social Finance Q&A.pdf",
-			html2canvas: { scale: 2 },
-			jsPDF: { unit: "in", format: "letter", orientation: "portrait", compressPDF: true, dpi: 300 },
-		})
-		.save()
-		.then(() => {
-			document.getElementById("radar").style.display = "block";
-			document.getElementById("bar").style.display = "block";
+		const elements = document.getElementsByClassName("accordion-item");
+		Array.from(elements).forEach((element) => {
+			element.classList.remove("disabled");
+			if (!element.classList.contains("active")) {
+				element.classList.toggle("active");
+			}
 		});
+
+		const icons = document.getElementsByClassName("accordion-icon");
+		Array.from(icons).forEach((icon) => {
+			icon.style.display = "none";
+		});
+
+		const radioLabels = document.querySelectorAll(".choices .radio-label");
+		Array.from(radioLabels).forEach((label) => {
+			label.style.maxWidth = "680px";
+		});
+		document.getElementById("c1-q2").style.pageBreakAfter = "always";
+		document.getElementById("c1-q5").style.pageBreakAfter = "always";
+		document.getElementById("c1-q7").style.pageBreakAfter = "always";
+		document.getElementById("c2-q7").style.pageBreakAfter = "always";
+
+		console.log(document.getElementById("c3-q3"));
+
+		const headings = document.querySelectorAll(".question h3");
+		Array.from(headings).forEach((heading) => {
+			heading.style.maxWidth = "750px";
+		});
+		// const socialHeader = document.querySelector(".cat-h");
+		// socialHeader.style = {
+		// 	display: "block",
+		// 	margin: "0 auto",
+		// 	backgroundColor: "#a2c700",
+		// };
+		// const socialBody = document.querySelector(".accordion-content");
+		// console.log(socialBody);
+
+		chartsDiv.prepend(radar, bar);
+		newDiv.prepend(header, chartsDiv, details, ...elements);
+
+		const element = document.getElementById("calPDF");
+		html2pdf()
+			.from(element)
+			.set({
+				margin: 0.2,
+				filename: "Social Finance Q&A.pdf",
+				html2canvas: { scale: 2 },
+				jsPDF: { unit: "in", format: "letter", orientation: "portrait", compressPDF: true, dpi: 300 },
+			})
+			.save()
+			.then(() => {
+				document.getElementById("radar").style.display = "block";
+				document.getElementById("bar").style.display = "block";
+			});
+	}, 2000);
 });

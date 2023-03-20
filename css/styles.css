@@ -165,16 +165,28 @@ input[type="radio"]:checked + label {
 	display: none !important;
 }
 
+#header-pdf {
+	margin-bottom: 60px !important;
+}
+#details-pdf {
+	margin-top: 60px !important;
+}
+
 @media print {
 	/* Insert a page break before the content */
-	.chartsPdf {
-		page-break-before: always;
+	/* .chartsPdf { */
+	/* page-break-before: always; */
+	/* margin-block: 80px !important; */
+	/* } */
+
+	.c1-3 {
+		page-break-after: always;
 	}
 
 	/* Center the content vertically */
-	.chartsPdf {
+	/* .chartsPdf {
 		position: relative;
 		top: 50%;
-		transform: translateY(-50%);
-	}
+		transform: translateY(-50%); */
+	/* } */
 }
