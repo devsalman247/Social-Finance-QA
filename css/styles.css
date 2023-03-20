@@ -1,0 +1,189 @@
+* {
+	font-family: "Karla", sans-serif;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+label {
+	cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+	background-color: #a2c700;
+	color: white;
+}
+
+.main {
+	position: relative;
+}
+
+.container {
+	width: 960px;
+	margin-inline: auto;
+	padding-block: 10px;
+	border: 2px solid #a2c700;
+	border-radius: 5px;
+	background-color: #f8f8f8;
+	display: flex;
+	flex-direction: column;
+}
+
+.accordion-header {
+	display: flex;
+	align-items: center;
+	padding-inline: 10px;
+	cursor: pointer;
+	background-color: #a2c700;
+	border-radius: 6px;
+}
+
+.disabled .accordion-header,
+.disabled span {
+	background: #888383bd;
+	color: white;
+	border-top: 2px solid white;
+	border-right: 2px solid white;
+	cursor: not-allowed;
+}
+
+.d-none {
+	display: none;
+}
+
+.accordion {
+	padding-inline: 10px;
+}
+
+.accordion-icon {
+	width: 10px;
+	height: 10px;
+	border-top: 2px solid black;
+	border-right: 2px solid black;
+	transform: rotate(45deg);
+	transition: transform 0.2s ease-in-out;
+}
+
+.accordion-icon.active {
+	transform: rotate(135deg);
+}
+
+.accordion-content {
+	padding: 10px;
+	display: none;
+	width: 900px;
+	margin-inline: auto;
+}
+
+.accordion-item {
+	margin-bottom: 10px;
+}
+
+.accordion-item.active .accordion-content {
+	display: block;
+}
+
+.question {
+	padding-left: 20px;
+	padding-block: 10px;
+	max-width: 900px;
+}
+
+/* .question:hover {
+	background-color: #ebebeb;
+	border-radius: 5px;
+} */
+
+.question h3 {
+	margin-block-start: 0;
+}
+
+.choices {
+	padding-left: 20px;
+}
+
+.radio-label {
+	display: block;
+	max-width: 765px;
+	padding-inline: 10px;
+	padding-block: 5px;
+	margin-block: 10px;
+	border: 1px solid #a2c700;
+	border-radius: 5px;
+}
+
+.radio-label:hover {
+	background-color: #a2c700;
+	color: white;
+}
+
+.cat-h {
+	margin-block: 12px;
+	padding-inline: 15px;
+}
+
+.submit {
+	background-color: #a2c700;
+	padding-inline: 10px;
+	padding-block: 5px;
+	margin-left: auto;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 1.3rem;
+	font-weight: 700;
+	margin-right: 10px;
+}
+
+#download {
+	background-color: #a2c700;
+	padding-inline: 10px;
+	padding-block: 5px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 1.3rem;
+	font-weight: 700;
+	display: inline-block;
+	margin-block: 10px;
+	width: 100px;
+	position: absolute;
+	right: 0;
+}
+
+.submit.disabled {
+	cursor: not-allowed;
+	color: white;
+	background-color: #888383bd;
+}
+
+.w100 {
+	width: 100%;
+}
+
+#polar,
+#bar {
+	width: 50% !important;
+	height: 50% !important;
+}
+
+#polarAlt,
+#barAlt {
+	width: 50% !important;
+	height: 50% !important;
+}
+
+@media print {
+	/* Insert a page break before the content */
+	.chartsPdf {
+		page-break-before: always;
+	}
+
+	/* Center the content vertically */
+	.chartsPdf {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
