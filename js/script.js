@@ -36,7 +36,7 @@ for (let question of questions) {
 			values[categories[0]][categories[1]] = Number(e.target.value);
 
 			if (e.target.name === "cat5-q8") {
-				document.querySelector(".submit.disabled").classList.toggle("disabled");
+				document.querySelector(".submit.disabled")?.classList.toggle("disabled");
 			}
 
 			const nextQuestion = question.nextElementSibling;
@@ -63,6 +63,7 @@ for (let question of questions) {
 		});
 	});
 }
+
 let radarChartOptions = {
 	series: [
 		{
@@ -71,18 +72,23 @@ let radarChartOptions = {
 		},
 	],
 	chart: {
-		// height: 350,
 		type: "radar",
+		height: 400,
+		width: 600,
 	},
-	// title: {
-	// 	text: "Social Finance Survey",
-	// },
-	// fill: {
-	// 	opacity: 1,
-	// },
+	colors: ["#a2c709"],
+	fill: {
+		colors: ["#a2c709"],
+		opacity: 0.85,
+	},
 	yaxis: { show: false, min: 0, max: 40 },
 	toolbar: { show: false },
 	xaxis: {
+		labels: {
+			style: {
+				colors: ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
+			},
+		},
 		categories: [
 			"The Social Problem",
 			"The Solution & Impact",
@@ -90,6 +96,18 @@ let radarChartOptions = {
 			"Growth & Scaling",
 			"Financing & Forecasts",
 		],
+	},
+	markers: {
+		size: 4,
+		colors: ["#a2c709"],
+	},
+	dataLabels: {
+		style: {
+			fontSize: "14px",
+			fontFamily: "Karla, Arial, sans-serif",
+			fontWeight: "bold",
+			colors: undefined,
+		},
 	},
 };
 
@@ -102,7 +120,8 @@ const barChartOptions = {
 	],
 	chart: {
 		type: "bar",
-		// height: 350,
+		height: 250,
+		width: 450,
 	},
 	plotOptions: {
 		bar: {
@@ -114,7 +133,66 @@ const barChartOptions = {
 		enabled: false,
 	},
 	toolbar: { show: false },
+	fill: {
+		colors: ["#a2c709"],
+	},
 	xaxis: {
+		labels: {
+			style: {
+				colors: ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
+			},
+		},
+		categories: [
+			"The Social Problem",
+			"The Solution & Impact",
+			"Market & Distribution",
+			"Growth & Scaling",
+			"Financing & Forecasts",
+		],
+		min: 0,
+		max: 40,
+	},
+	yaxis: {
+		labels: {
+			style: {
+				colors: ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
+			},
+		},
+	},
+	grid: {
+		yaxis: {
+			lines: {
+				show: false,
+			},
+		},
+	},
+};
+
+let radarAltChartOptions = {
+	series: [
+		{
+			name: "Score",
+			data: [],
+		},
+	],
+	chart: {
+		type: "radar",
+		height: 300,
+		width: 450,
+	},
+	colors: ["#a2c709"],
+	fill: {
+		colors: ["#a2c709"],
+		opacity: 0.85,
+	},
+	yaxis: { show: false, min: 0, max: 40 },
+	toolbar: { show: false },
+	xaxis: {
+		labels: {
+			style: {
+				colors: ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
+			},
+		},
 		categories: [
 			"The Social Problem",
 			"The Solution & Impact",
@@ -123,12 +201,85 @@ const barChartOptions = {
 			"Financing & Forecasts",
 		],
 	},
+	markers: {
+		size: 4,
+		colors: ["#a2c709"],
+	},
+	dataLabels: {
+		style: {
+			fontSize: "14px",
+			fontFamily: "Karla, Arial, sans-serif",
+			fontWeight: "bold",
+			colors: undefined,
+		},
+	},
+};
+
+const barAltChartOptions = {
+	series: [
+		{
+			name: "Score",
+			data: [],
+		},
+	],
+	chart: {
+		type: "bar",
+		height: 200,
+		width: 400,
+	},
+	plotOptions: {
+		bar: {
+			borderRadius: 4,
+			horizontal: true,
+		},
+	},
+	dataLabels: {
+		enabled: false,
+	},
+	toolbar: { show: false },
+	fill: {
+		colors: ["#a2c709"],
+	},
+	xaxis: {
+		labels: {
+			style: {
+				colors: ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
+			},
+		},
+		categories: [
+			"The Social Problem",
+			"The Solution & Impact",
+			"Market & Distribution",
+			"Growth & Scaling",
+			"Financing & Forecasts",
+		],
+		min: 0,
+		max: 40,
+	},
+	yaxis: {
+		labels: {
+			style: {
+				colors: ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
+			},
+		},
+	},
+	grid: {
+		yaxis: {
+			lines: {
+				show: false,
+			},
+		},
+	},
 };
 
 const barChart = new ApexCharts(document.getElementById("bar"), barChartOptions);
 barChart.render();
 const radarChart = new ApexCharts(document.getElementById("radar"), radarChartOptions);
 radarChart.render();
+const barAltChart = new ApexCharts(document.getElementById("barAlt"), barAltChartOptions);
+barAltChart.render();
+const radarAltChart = new ApexCharts(document.getElementById("radarAlt"), radarAltChartOptions);
+radarAltChart.render();
 
 document.getElementById("submit").addEventListener("click", (e) => {
 	for (let prop in values) {
@@ -149,110 +300,26 @@ document.getElementById("submit").addEventListener("click", (e) => {
 	parentCtx.style.display = "flex";
 	parentCtx.style.justifyContent = "center";
 	parentCtx.style.alignItems = "center";
-	parentCtx.style.marginInline = "auto";
-	parentCtx.style.width = "1260px";
-	parentCtx.style.gap = "20px";
 	parentCtx.parentElement.classList.add("w100");
 	parentCtx.parentElement.style.backgroundColor = "#191919cc";
-	// console.log(ctx.parentElement, ctx);
 
 	Chart.defaults.color = "white";
 	radarChartOptions.series[0].data = resultArray;
 	barChartOptions.series[0].data = resultArray;
-
-	// new Chart(ctx, {
-	// 	type: "bar",
-	// 	data: {
-	// 		labels: [
-	// 			"The Social Problem",
-	// 			"The Solution & Impact",
-	// 			"Market & Distribution",
-	// 			"Growth & Scaling",
-	// 			"Financing & Forecasts",
-	// 		],
-	// 		datasets: [
-	// 			{
-	// 				label: "Score",
-	// 				data: resultArray,
-	// 				borderWidth: 1,
-	// 				backgroundColor: "#a2c709",
-	// 				// borderColor: "white",
-	// 			},
-	// 		],
-	// 	},
-	// 	options: {
-	// 		indexAxis: "y",
-	// 		scales: {
-	// 			y: {
-	// 				beginAtZero: true,
-	// 			},
-	// 			x: {
-	// 				max: 40,
-	// 			},
-	// 			// xAxes: [
-	// 			// 	{
-	// 			// 		ticks: {
-	// 			// 			fontColor: "white",
-	// 			// 		},
-	// 			// 		gridLines: {
-	// 			// 			color: "white",
-	// 			// 		},
-	// 			// 	},
-	// 			// ],
-	// 			// yAxes: [
-	// 			// 	{
-	// 			// 		ticks: {
-	// 			// 			fontColor: "white",
-	// 			// 		},
-	// 			// 		gridLines: {
-	// 			// 			color: "white",
-	// 			// 		},
-	// 			// 	},
-	// 			// ],
-	// 		},
-	// 	},
-	// });
-	// new Chart(barAlt, {
-	// 	type: "bar",
-	// 	data: {
-	// 		labels: [
-	// 			"The Social Problem",
-	// 			"The Solution & Impact",
-	// 			"Market & Distribution",
-	// 			"Growth & Scaling",
-	// 			"Financing & Forecasts",
-	// 		],
-	// 		datasets: [
-	// 			{
-	// 				label: "Score",
-	// 				data: resultArray,
-	// 				borderWidth: 1,
-	// 				backgroundColor: "#a2c709",
-	// 				borderColor: "white",
-	// 			},
-	// 		],
-	// 	},
-	// 	options: {
-	// 		indexAxis: "y",
-	// 		scales: {
-	// 			y: {
-	// 				beginAtZero: true,
-	// 			},
-	// 			x: {
-	// 				max: 40,
-	// 			},
-	// 		},
-	// 	},
-	// });
-
-	const polarArea = document.getElementById("polar");
-	const polarAlt = document.getElementById("polarAlt");
+	radarAltChartOptions.series[0].data = resultArray;
+	barAltChartOptions.series[0].data = resultArray;
 
 	document.getElementById("download").style.display = "inline-block";
 });
 
 document.getElementById("download").addEventListener("click", function downloadPDF(e) {
 	e.preventDefault();
+	document.getElementById("radar").style.display = "none";
+	document.getElementById("bar").style.display = "none";
+
+	document.getElementById("radarAlt").style.display = "block";
+	document.getElementById("barAlt").style.display = "block";
+
 	const enterBefore = document.querySelector(".accordion");
 	const newDiv = document.createElement("div");
 	newDiv.id = "calPDF";
@@ -261,15 +328,18 @@ document.getElementById("download").addEventListener("click", function downloadP
 	chartsDiv.style.display = "flex";
 	chartsDiv.style.justifyContent = "center";
 	chartsDiv.style.alignItems = "center";
+	chartsDiv.style.width = "100%";
+	chartsDiv.style.height = "100%";
+	chartsDiv.style.backgroundColor = "#191919cc";
 	enterBefore.prepend(newDiv);
 
-	const polar = document.getElementById("radar");
-	const bar = document.getElementById("bar");
-	polar.style.marginInline = "auto";
+	const radar = document.getElementById("radarAlt");
+	const bar = document.getElementById("barAlt");
+	radar.style.marginInline = "auto";
 	bar.style.marginInline = "auto";
 	bar.style.pageBreakAfter = "always";
 
-	chartsDiv.prepend(polar, bar);
+	chartsDiv.prepend(radar, bar);
 	newDiv.prepend(chartsDiv);
 
 	const element = document.getElementById("calPDF");
@@ -283,7 +353,7 @@ document.getElementById("download").addEventListener("click", function downloadP
 		})
 		.save()
 		.then(() => {
-			document.getElementById("polarAlt").style.display = "block";
-			document.getElementById("barAlt").style.display = "block";
+			document.getElementById("radar").style.display = "block";
+			document.getElementById("bar").style.display = "block";
 		});
 });

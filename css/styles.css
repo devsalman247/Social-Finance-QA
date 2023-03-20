@@ -138,7 +138,6 @@ input[type="radio"]:checked + label {
 
 #download {
 	background-color: #a2c700;
-	padding-inline: 10px;
 	padding-block: 5px;
 	border: none;
 	border-radius: 3px;
@@ -161,25 +160,6 @@ input[type="radio"]:checked + label {
 .w100 {
 	width: 100%;
 }
-
-/* #polar,
-#bar {
-	width: 50% !important;
-	height: 50% !important;
-}
-
-#polarAlt,
-#barAlt {
-	width: 50% !important;
-	height: 50% !important;
-} */
-
-/* #bar,
-#radar {
-	width: 600px;
-	height: 400px;
-	margin: auto;
-} */
 
 .apexcharts-toolbar {
 	display: none !important;
