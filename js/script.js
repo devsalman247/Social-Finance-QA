@@ -333,6 +333,7 @@ document.getElementById("submit").addEventListener("click", (e) => {
 	barAltChartOptions.series[0].data = resultArray;
 
 	document.getElementById("download").style.display = "inline-block";
+	document.getElementById("reset").style.display = "inline-block";
 });
 
 document.getElementById("download").addEventListener("click", function downloadPDF(e) {
@@ -442,4 +443,58 @@ document.getElementById("download").addEventListener("click", function downloadP
 				document.getElementById("bar").style.display = "block";
 			});
 	}, 2000);
+});
+document.getElementById("reset").addEventListener("click", function resetForm() {
+	document.getElementById("download").style.display = "none";
+	document.getElementById("reset").style.display = "none";
+	document.getElementById("radar").style.display = "none";
+	document.getElementById("bar").style.display = "none";
+	document.getElementById("radarAlt").style.display = "none";
+	document.querySelector(".accordion").classList.toggle("d-none");
+	// document.getElementById("calPDF").style.display = "none";
+	document.getElementById("barAlt").style.display = "none";
+	document.getElementById("submit").classList.toggle("d-none");
+	const ctx = document.getElementById("bar");
+	const parentCtx = ctx.parentElement;
+	parentCtx.classList.add("d-none");
+	parentCtx.parentElement.style.backgroundColor = "#f8f8f8";
+	parentCtx.parentElement.style.width = "960px";
+
+	const elements = document.getElementsByClassName("accordion-item");
+	Array.from(elements).forEach((element, index) => {
+		if (index !== 0) {
+			element.classList.add("disabled");
+			if (element.classList.contains("active")) {
+				element.classList.toggle("active");
+			}
+		} else {
+			document.querySelector(".accordion-icon").classList.toggle("active");
+			element.classList.toggle("active");
+		}
+	});
+
+	const questions = document.querySelectorAll(".question");
+	Array.from(questions).forEach((question, index) => {
+		question.querySelector(".cat-c:checked").checked = false;
+		if (index !== 0) {
+			if (!question.classList.contains("d-none")) {
+				question.classList.toggle("d-none");
+			}
+		}
+	});
+
+	const icons = document.getElementsByClassName("accordion-icon");
+	Array.from(icons).forEach((icon) => {
+		icon.style.display = "inline";
+	});
+
+	const radioLabels = document.querySelectorAll(".choices .radio-label");
+	Array.from(radioLabels).forEach((label) => {
+		label.style.maxWidth = "765px";
+	});
+
+	const headings = document.querySelectorAll(".question h3");
+	Array.from(headings).forEach((heading) => {
+		heading.style.maxWidth = "100%";
+	});
 });
