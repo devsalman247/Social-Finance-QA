@@ -43,7 +43,7 @@ for (let question of questions) {
 
 			if (nextQuestion) {
 				nextQuestion.classList.remove("d-none");
-				nextQuestion.scrollIntoView({ behavior: "smooth" });
+				// nextQuestion.scrollIntoView({ behavior: "smooth" });
 			}
 
 			if (nextQuestion === null) {
@@ -51,7 +51,7 @@ for (let question of questions) {
 
 				if (nextSection !== null) {
 					nextSection.querySelector(".question").classList.remove("d-none");
-					nextSection.querySelector(".question").scrollIntoView({ behavior: "smooth" });
+					// nextSection.querySelector(".question").scrollIntoView({ behavior: "smooth" });
 					nextSection.classList.remove("disabled");
 					nextSection.classList.toggle("active");
 					nextSection.querySelector(".accordion-icon").classList.toggle("active");
@@ -406,6 +406,11 @@ document.getElementById("download").addEventListener("click", function downloadP
 		document.getElementById("c1-q5").style.pageBreakAfter = "always";
 		document.getElementById("c1-q7").style.pageBreakAfter = "always";
 		document.getElementById("c2-q7").style.pageBreakAfter = "always";
+		document.getElementById("c3-q1").style.pageBreakAfter = "always";
+		document.getElementById("c4-q1").style.pageBreakAfter = "always";
+		document.getElementById("c4-q7").style.pageBreakAfter = "always";
+		document.getElementById("c5-q2").style.pageBreakAfter = "always";
+		document.getElementById("c5-q5").style.pageBreakAfter = "always";
 
 		console.log(document.getElementById("c3-q3"));
 
@@ -415,7 +420,12 @@ document.getElementById("download").addEventListener("click", function downloadP
 		});
 
 		chartsDiv.prepend(radar, bar);
-		newDiv.prepend(header, chartsDiv, details, ...elements);
+		const parent5 = document.querySelector(".question.c5-0").parentElement.parentElement;
+		const parent4 = document.querySelector(".question.c4-0").parentElement.parentElement;
+		const parent3 = document.querySelector(".question.c3-0").parentElement.parentElement;
+		const parent2 = document.querySelector(".question.c2-0").parentElement.parentElement;
+		const parent1 = document.querySelector(".question.c1-0").parentElement.parentElement;
+		newDiv.prepend(header, chartsDiv, details, parent1, parent2, parent3, parent4, parent5);
 
 		const element = document.getElementById("calPDF");
 		html2pdf()
@@ -423,7 +433,7 @@ document.getElementById("download").addEventListener("click", function downloadP
 			.set({
 				margin: 0.2,
 				filename: "Social Finance Q&A.pdf",
-				html2canvas: { scale: 2 },
+				html2canvas: { scale: 1 },
 				jsPDF: { unit: "in", format: "letter", orientation: "portrait", compressPDF: true, dpi: 300 },
 			})
 			.save()
