@@ -43,6 +43,7 @@ for (let question of questions) {
 
 			if (nextQuestion) {
 				nextQuestion.classList.remove("d-none");
+				nextQuestion.scrollIntoView({ behavior: "smooth" });
 			}
 
 			if (nextQuestion === null) {
@@ -50,6 +51,7 @@ for (let question of questions) {
 
 				if (nextSection !== null) {
 					nextSection.querySelector(".question").classList.remove("d-none");
+					nextSection.querySelector(".question").scrollIntoView({ behavior: "smooth" });
 					nextSection.classList.remove("disabled");
 					nextSection.classList.toggle("active");
 					nextSection.querySelector(".accordion-icon").classList.toggle("active");
@@ -59,7 +61,6 @@ for (let question of questions) {
 					activeSection.querySelector(".accordion-icon").classList.toggle("active");
 				}
 			}
-			document.getElementById("scroll").scrollIntoView({ behavior: "smooth" });
 		});
 	});
 }
@@ -390,14 +391,6 @@ document.getElementById("download").addEventListener("click", function downloadP
 		Array.from(headings).forEach((heading) => {
 			heading.style.maxWidth = "750px";
 		});
-		// const socialHeader = document.querySelector(".cat-h");
-		// socialHeader.style = {
-		// 	display: "block",
-		// 	margin: "0 auto",
-		// 	backgroundColor: "#a2c700",
-		// };
-		// const socialBody = document.querySelector(".accordion-content");
-		// console.log(socialBody);
 
 		chartsDiv.prepend(radar, bar);
 		newDiv.prepend(header, chartsDiv, details, ...elements);
