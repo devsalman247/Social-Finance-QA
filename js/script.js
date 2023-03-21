@@ -66,6 +66,17 @@ for (let question of questions) {
 }
 
 let radarChartOptions = {
+	responsive: [
+		{
+			breakpoint: 1024,
+			options: {
+				chart: {
+					height: 250,
+					width: 400,
+				},
+			},
+		},
+	],
 	series: [
 		{
 			name: "Score",
@@ -113,6 +124,17 @@ let radarChartOptions = {
 };
 
 const barChartOptions = {
+	responsive: [
+		{
+			breakpoint: 1024,
+			options: {
+				chart: {
+					height: 150,
+					width: 300,
+				},
+			},
+		},
+	],
 	series: [
 		{
 			name: "Score",

@@ -146,9 +146,6 @@ input[type="radio"]:checked + label {
 	font-weight: 700;
 	display: inline-block;
 	margin-block: 10px;
-	width: 100px;
-	position: absolute;
-	right: 0;
 }
 
 .submit.disabled {
@@ -170,6 +167,37 @@ input[type="radio"]:checked + label {
 }
 #details-pdf {
 	margin-top: 60px !important;
+}
+
+#download-btn {
+	display: flex;
+	justify-content: end;
+	width: 100%;
+}
+
+@media (max-width: 768px) {
+	.container {
+		width: 680px;
+	}
+
+	.question {
+		max-width: 610px;
+	}
+
+	#download-btn {
+		width: 680px;
+		margin-inline: auto;
+	}
+}
+
+@media (max-width: 480px) {
+	.container {
+		width: 680px;
+	}
+
+	.question {
+		max-width: 610px;
+	}
 }
 
 @media print {
