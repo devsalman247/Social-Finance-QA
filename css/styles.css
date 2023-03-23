@@ -138,7 +138,6 @@ input[type="radio"]:checked + label {
 
 #download {
 	background-color: #a2c700;
-	padding-inline: 10px;
 	padding-block: 5px;
 	border: none;
 	border-radius: 3px;
@@ -147,9 +146,6 @@ input[type="radio"]:checked + label {
 	font-weight: 700;
 	display: inline-block;
 	margin-block: 10px;
-	width: 100px;
-	position: absolute;
-	right: 0;
 }
 
 .submit.disabled {
@@ -162,28 +158,96 @@ input[type="radio"]:checked + label {
 	width: 100%;
 }
 
-#polar,
-#bar {
-	width: 50% !important;
-	height: 50% !important;
+.apexcharts-toolbar {
+	display: none !important;
 }
 
-#polarAlt,
-#barAlt {
-	width: 50% !important;
-	height: 50% !important;
+#header-pdf {
+	margin-bottom: 60px !important;
+}
+#details-pdf {
+	margin-top: 60px !important;
+}
+
+#download-btn {
+	display: flex;
+	justify-content: end;
+	width: 100%;
+}
+
+#reset {
+	margin-right: 10px;
+	background-color: #a2c700;
+	padding-block: 5px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 1.3rem;
+	font-weight: 700;
+	display: inline-block;
+	margin-block: 10px;
+}
+
+@media (max-width: 768px) {
+	.container {
+		width: 680px;
+	}
+
+	.question {
+		max-width: 610px;
+	}
+
+	#download-btn {
+		width: 680px;
+		margin-inline: auto;
+	}
+}
+
+@media (max-width: 480px) {
+	.container {
+		width: 380px;
+	}
+
+	.question {
+		max-width: 340px;
+	}
+
+	.accordion-content {
+		width: 340px;
+	}
+
+	.choices {
+		padding-left: 4px;
+	}
+
+	.submit {
+		margin-right: 22px;
+	}
+
+	#download-btn {
+		width: 380px;
+	}
+
+	#chart-container {
+		flex-direction: column;
+	}
 }
 
 @media print {
 	/* Insert a page break before the content */
-	.chartsPdf {
-		page-break-before: always;
+	/* .chartsPdf { */
+	/* page-break-before: always; */
+	/* margin-block: 80px !important; */
+	/* } */
+
+	.c1-3 {
+		page-break-after: always;
 	}
 
 	/* Center the content vertically */
-	.chartsPdf {
+	/* .chartsPdf {
 		position: relative;
 		top: 50%;
-		transform: translateY(-50%);
-	}
+		transform: translateY(-50%); */
+	/* } */
 }
