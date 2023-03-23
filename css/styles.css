@@ -205,11 +205,31 @@ input[type="radio"]:checked + label {
 
 @media (max-width: 480px) {
 	.container {
-		width: 680px;
+		width: 380px;
 	}
 
 	.question {
-		max-width: 610px;
+		max-width: 340px;
+	}
+
+	.accordion-content {
+		width: 340px;
+	}
+
+	.choices {
+		padding-left: 4px;
+	}
+
+	.submit {
+		margin-right: 22px;
+	}
+
+	#download-btn {
+		width: 380px;
+	}
+
+	#chart-container {
+		flex-direction: column;
 	}
 }
 
