@@ -2,6 +2,10 @@
 	font-family: "Karla", sans-serif;
 }
 
+.accordion-header .cat-h {
+	font-family: "Open Sans", sans-serif;
+}
+
 input[type="radio"] {
 	display: none;
 }
