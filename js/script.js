@@ -406,12 +406,18 @@ document.getElementById("download").addEventListener("click", function downloadP
 		document.getElementById("c1-q2").style.pageBreakAfter = "always";
 		document.getElementById("c1-q5").style.pageBreakAfter = "always";
 		document.getElementById("c1-q7").style.pageBreakAfter = "always";
+		document.getElementById("c2-q1").style.pageBreakAfter = "always";
+		document.getElementById("c2-q3").style.pageBreakAfter = "always";
 		document.getElementById("c2-q7").style.pageBreakAfter = "always";
 		document.getElementById("c3-q1").style.pageBreakAfter = "always";
+		document.getElementById("c3-q3").style.pageBreakAfter = "always";
+		document.getElementById("c3-q7").style.pageBreakAfter = "always";
 		document.getElementById("c4-q1").style.pageBreakAfter = "always";
+		document.getElementById("c4-q3").style.pageBreakAfter = "always";
 		document.getElementById("c4-q7").style.pageBreakAfter = "always";
 		document.getElementById("c5-q2").style.pageBreakAfter = "always";
 		document.getElementById("c5-q5").style.pageBreakAfter = "always";
+		document.getElementById("c4-q5").style.pageBreakAfter = "always";
 
 		console.log(document.getElementById("c3-q3"));
 
@@ -434,7 +440,7 @@ document.getElementById("download").addEventListener("click", function downloadP
 			.set({
 				margin: 0.2,
 				filename: "Social Finance Q&A.pdf",
-				html2canvas: { scale: 1 },
+				html2canvas: { scale: 0.8 },
 				jsPDF: { unit: "in", format: "letter", orientation: "portrait", compressPDF: true, dpi: 300 },
 			})
 			.save()
