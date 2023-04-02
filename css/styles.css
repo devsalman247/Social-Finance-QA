@@ -19,6 +19,12 @@ input[type="radio"]:checked + label {
 	color: white;
 }
 
+.checked-label {
+	background-color: white !important;
+	color: black !important;
+	font-weight: 700 !important;
+}
+
 .main {
 	position: relative;
 }
@@ -40,6 +46,15 @@ input[type="radio"]:checked + label {
 	padding-inline: 10px;
 	cursor: pointer;
 	background-color: #a2c700;
+	border-radius: 6px;
+}
+
+.accordion-header-pdf {
+	display: flex;
+	align-items: center;
+	padding-inline: 10px;
+	cursor: pointer;
+	background-color: #a2c700 !important;
 	border-radius: 6px;
 }
 

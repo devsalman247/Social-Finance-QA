@@ -417,9 +417,9 @@ document.getElementById("download").addEventListener("click", function downloadP
 		document.getElementById("c4-q7").style.pageBreakAfter = "always";
 		document.getElementById("c5-q2").style.pageBreakAfter = "always";
 		document.getElementById("c5-q5").style.pageBreakAfter = "always";
+		document.getElementById("c5-q2").style.marginBottom = "7px";
+		document.getElementById("c5-q5").style.marginBottom = "7px";
 		document.getElementById("c4-q5").style.pageBreakAfter = "always";
-
-		console.log(document.getElementById("c3-q3"));
 
 		const headings = document.querySelectorAll(".question h3");
 		Array.from(headings).forEach((heading) => {
@@ -432,6 +432,13 @@ document.getElementById("download").addEventListener("click", function downloadP
 		const parent3 = document.querySelector(".question.c3-0").parentElement.parentElement;
 		const parent2 = document.querySelector(".question.c2-0").parentElement.parentElement;
 		const parent1 = document.querySelector(".question.c1-0").parentElement.parentElement;
+		const radioChecked = document.querySelectorAll('input[type="radio"]:checked + label');
+		radioChecked.forEach((label) => {
+			label.classList.add("checked-label");
+		});
+		accordionHeaders.forEach((header) => {
+			header.classList.add("accordion-header-pdf");
+		});
 		newDiv.prepend(header, chartsDiv, details, parent1, parent2, parent3, parent4, parent5);
 
 		const element = document.getElementById("calPDF");
@@ -440,7 +447,9 @@ document.getElementById("download").addEventListener("click", function downloadP
 			.set({
 				margin: 0.2,
 				filename: "Social Finance Q&A.pdf",
-				html2canvas: { scale: 0.8 },
+				html2canvas: {
+					scale: 1.2,
+				},
 				jsPDF: { unit: "in", format: "letter", orientation: "portrait", compressPDF: true, dpi: 300 },
 			})
 			.save()
@@ -460,11 +469,21 @@ document.getElementById("reset").addEventListener("click", function resetForm() 
 	// document.getElementById("calPDF").style.display = "none";
 	document.getElementById("barAlt").style.display = "none";
 	document.getElementById("submit").classList.toggle("d-none");
+	document.getElementById("c5-q2").style.marginBottom = "";
+	document.getElementById("c5-q5").style.marginBottom = "";
 	const ctx = document.getElementById("bar");
 	const parentCtx = ctx.parentElement;
 	parentCtx.classList.add("d-none");
 	parentCtx.parentElement.style.backgroundColor = "#f8f8f8";
 	parentCtx.parentElement.style.width = "960px";
+
+	const radioChecked = document.querySelectorAll('input[type="radio"]:checked + label');
+	radioChecked.forEach((label) => {
+		label.classList.remove("checked-label");
+	});
+	accordionHeaders.forEach((header) => {
+		header.classList.remove("accordion-header-pdf");
+	});
 
 	const elements = document.getElementsByClassName("accordion-item");
 	Array.from(elements).forEach((element, index) => {
